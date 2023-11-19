@@ -1,0 +1,10 @@
+3
+SOT315
+Nhap mon lap trinh
+3
+SOT316
+Ky thuat lap trinh
+3
+SOT317
+Tin hoc dai cuong A
+3
