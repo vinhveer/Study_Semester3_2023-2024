@@ -1,37 +1,35 @@
 #include <iostream>
 #include <fstream>
-#include <vector>
-#include <limits>
-
 using namespace std;
 
-#define MAX 30
+#define MAX 100
 
-int t[MAX];
-int n;
-int tongTien;
+int n, s, sum, c, cbest;
+int t[MAX], x[MAX], tmax[MAX], kq[MAX];
 
-void DocFile()
+void ReadFile()
 {
-    ifstream inputFile("bai2.inp");
-    if (inputFile.is_open())
+    ifstream file("bai2.inp");
+    if (file.is_open())
     {
-        inputFile >> n;
-        inputFile >> tongTien;
+        file >> n;
+        file >> s;
         for (int i = 1; i <= n; i++)
-                inputFile >> t[i];
-
-        inputFile.close();
+            file >> t[i];
+        file.close();
     }
     else
     {
-        cout << "Error opening input.txt file." << endl;
+        cout << "Error!" << endl;
         exit(EXIT_FAILURE);
     }
 }
 
-void XuatMang()
+void PrintArray()
 {
+    cout << "N = " << n << endl;
+    cout << "S = " << s << endl;
+    cout << "Array value: ";
     for (int i = 1; i <= n; i++)
         cout << t[i] << " ";
     cout << endl;
@@ -39,7 +37,7 @@ void XuatMang()
 
 int main()
 {
-    DocFile();
-    XuatMang();
+    ReadFile();
+    PrintArray();
     return 0;
 }
