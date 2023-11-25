@@ -1,103 +1,84 @@
 #include <iostream>
 #include <fstream>
-#include <vector>
-#include <limits>
-
 using namespace std;
 
-#define MAX 30
+#define MAX 100
 
-int n;
 int c[MAX][MAX];
-int x[MAX];
-int chuaXet[MAX];
-int tongChiPhi[MAX];
+int x[MAX + 1];
+int notEvaluate[MAX];
+int n;
 
-void DocFile()
+bool ReadFile()
 {
-    ifstream inputFile("input.txt");
-    if (inputFile.is_open())
+    ifstream file("bai1_input.txt");
+    if (!file.is_open())
     {
-        inputFile >> n;
-        for (int i = 1; i <= n; i++)
-            for (int j = 1; j <= n; j++)
-                inputFile >> c[i][j];
-
-        inputFile.close();
+        cout << "Error opening file\n";
+        return false;
     }
     else
     {
-        cout << "Error opening input.txt file." << endl;
-        exit(EXIT_FAILURE);
+        file >> n;
+        for (int i = 1; i <= n; i++)
+            for (int j = 1; j <= n; j++)
+                file >> c[i][j];
+        file.close();
+        return true;
     }
 }
 
-void XuatMaTran()
+void PrintMatrix()
 {
+    cout << n << endl;
     for (int i = 1; i <= n; i++)
     {
         for (int j = 1; j <= n; j++)
-        {
             cout << c[i][j] << " ";
-        }
         cout << endl;
     }
 }
 
-void InKetQua()
+void PrintResult()
 {
     int s = 0;
-    for (int i = 1; i <= n; i++)
+    cout << "City1 -> ";
+    for (int i = 2; i <= n; i++)
     {
-        cout << x[i] << " -> ";
+        cout << "City " << x[i] << " -> ";
         s += c[x[i - 1]][x[i]];
     }
-    s += c[x[n - 1]][1];
-    cout << x[1] << " ";
-    cout << "Cost: " << s << endl;
+    s += c[x[n]][1];
+    cout << "City1 ; ";
+    cout << "Total cost is: " << s << endl;
 }
 
-void TP(int i)
+void City(int i)
 {
     for (int j = 2; j <= n; j++)
-        if (chuaXet[j] == 0)
+        if (notEvaluate[j] == 0)
         {
             x[i] = j;
-            chuaXet[j] = 1;
+            notEvaluate[j] = 1;
             if (i == n)
-                InKetQua();
+                PrintResult();
             else
-                TP(i + 1);
-            chuaXet[j] = 0;
+                City(i + 1);
+            notEvaluate[j] = 0;
         }
-}
-
-void GhiFile()
-{
-    ofstream outputFile("output.txt");
-    if (outputFile.is_open())
-    {
-        InKetQua(); // Write the result to the file
-        outputFile.close();
-    }
-    else
-    {
-        cout << "Error opening output.txt file." << endl;
-        exit(EXIT_FAILURE);
-    }
 }
 
 int main()
 {
-    // Khoi tao chua xet thanh phan la 0
-    for (int i = 1; i <= n; i++)
-        chuaXet[i] = 0;
-
+    for (int i = 2; i <= n; i++)
+        notEvaluate[i] = 0;
     x[1] = 1;
-    DocFile();
-    XuatMaTran();
-    GhiFile();
-    TP(2);
+
+    if (ReadFile())
+    {
+        PrintMatrix();
+        City(2);
+    }
 
     return 0;
 }

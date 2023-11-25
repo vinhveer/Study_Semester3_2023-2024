@@ -1,64 +1,69 @@
 #include <iostream>
 #include <fstream>
 
-const int MAX_N = 30;
-int tien[MAX_N];
-int sol[MAX_N];
-int sol_count = 0;
+using namespace std;
 
-void rutTien(int n, int s, int vitri)
+#define MAX 100
+
+int n, s;
+int t[MAX], x[MAX];
+int count = 1;
+
+void ReadFile()
 {
-    if (s == 0)
+    ifstream file("bai3_input.txt");
+    if (!file.is_open())
+        printf("Loi file");
+    else
     {
-        // In ra cách trả tiền
-        for (int i = 0; i < vitri; ++i)
-        {
-            std::cout << sol[i] << " ";
-        }
-        std::cout << std::endl;
-        ++sol_count;
-        return;
+        file >> n;
+        file >> s;
+        for (int i = 1; i <= n; i++)
+            file >> t[i];
+        file.close();
     }
+}
 
-    for (int i = 0; i < n; ++i)
+void PrintArray()
+{
+    cout << n << " " << s << endl;
+    for (int i = 1; i <= n; i++)
+        cout << t[i] << " ";
+    cout << endl;
+}
+
+void PrintResult()
+{
+    int sum = 0;
+    for (int i = 1; i <= n; i++)
+        sum += x[i] * t[i];
+
+    if (sum == s)
     {
-        if (s >= tien[i])
-        {
-            sol[vitri] = tien[i];
-            rutTien(n, s - tien[i], vitri + 1);
-        }
+        cout <<"Cach " << count++ << ": ";
+        for (int i = 1; i <= n; i++)
+            if (x[i])
+                cout << "(" << i << ")" << t[i] << "\t";
+        cout << endl;
+    }
+}
+
+void Try(int i)
+{
+    for (int j = 0; j <= 1; j++)
+    {
+        x[i] = j;
+        if (i == n)
+            PrintResult();
+        else
+            Try(i + 1);
     }
 }
 
 int main()
 {
-    std::ifstream inputFile("input.txt");
-
-    if (!inputFile.is_open())
-    {
-        std::cerr << "Khong the mo file input.txt" << std::endl;
-        return 1;
-    }
-
-    int n, s;
-    inputFile >> n >> s;
-
-    // Nhập giá trị của các tờ tiền
-    for (int i = 0; i < n; ++i)
-    {
-        inputFile >> tien[i];
-    }
-
-    inputFile.close();
-
-    // Gọi hàm quay lui để tìm cách rút tiền
-    rutTien(n, s, 0);
-
-    // Kiểm tra xem có cách trả tiền hay không
-    if (sol_count == 0)
-    {
-        std::cout << -1 << std::endl;
-    }
-
+    ReadFile();
+    PrintArray();
+    Try(1);
     return 0;
 }

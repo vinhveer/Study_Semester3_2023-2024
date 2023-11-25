@@ -1,0 +1,2 @@
+Cach tra tien cua ATM: 300 200 
+Tong so to la: 2
