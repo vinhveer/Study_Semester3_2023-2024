@@ -1,18 +1,18 @@
 #include <iostream>
 using namespace std;
 
-void findVachSon(int n, int m, int distances[])
+void TimVachSon(int n, int m, int kcach[])
 {
     int i = 0, j = 1;
 
     while (j < n)
     {
-        if (distances[j] - distances[i] == m)
+        if (kcach[j] - kcach[i] == m)
         {
-            cout << distances[i] << " " << distances[j] << endl;
+            cout << kcach[i] << " " << kcach[j] << endl;
             return;
         }
-        else if (distances[j] - distances[i] > m)
+        else if (kcach[j] - kcach[i] > m)
         {
             i++;
         }
@@ -30,13 +30,13 @@ int main()
     int n, m;
     cin >> n >> m;
 
-    int distances[n];
+    int kcach[n];
     for (int i = 0; i < n; ++i)
     {
-        cin >> distances[i];
+        cin >> kcach[i];
     }
 
-    findVachSon(n, m, distances);
+    TimVachSon(n, m, kcach);
 
     return 0;
 }

@@ -9,7 +9,7 @@ struct Node
     Node(int value) : data(value), left(nullptr), right(nullptr) {}
 };
 
-Node *insert(Node *root, int value)
+Node *Chen(Node *root, int value)
 {
     if (root == nullptr)
     {
@@ -18,22 +18,22 @@ Node *insert(Node *root, int value)
 
     if (value < root->data)
     {
-        root->left = insert(root->left, value);
+        root->left = Chen(root->left, value);
     }
     else
     {
-        root->right = insert(root->right, value);
+        root->right = Chen(root->right, value);
     }
 
     return root;
 }
 
-void postOrderTraversal(Node *root)
+void Duyet(Node *root)
 {
     if (root != nullptr)
     {
-        postOrderTraversal(root->left);
-        postOrderTraversal(root->right);
+        Duyet(root->left);
+        Duyet(root->right);
         cout << root->data << " ";
     }
 }
@@ -49,10 +49,10 @@ int main()
     {
         int value;
         cin >> value;
-        root = insert(root, value);
+        root = Chen(root, value);
     }
 
-    postOrderTraversal(root);
+    Duyet(root);
 
     return 0;
 }

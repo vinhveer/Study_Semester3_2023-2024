@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 using namespace std;
 
 struct Node
@@ -10,23 +9,23 @@ struct Node
     Node(int value) : data(value), left(nullptr), right(nullptr) {}
 };
 
-void preOrderTraversal(Node *root)
+void Duyet(Node *root)
 {
     if (root != nullptr)
     {
         cout << root->data << " ";
-        preOrderTraversal(root->left);
-        preOrderTraversal(root->right);
+        Duyet(root->left);
+        Duyet(root->right);
     }
 }
 
-Node *buildBinaryTree(vector<int> &arr, int n, int i)
+Node *TaoCay(int arr[], int n, int i)
 {
     if (i < n)
     {
         Node *temp = new Node(arr[i]);
-        temp->left = buildBinaryTree(arr, n, 2 * i + 1);
-        temp->right = buildBinaryTree(arr, n, 2 * i + 2);
+        temp->left = TaoCay(arr, n, 2 * i + 1);
+        temp->right = TaoCay(arr, n, 2 * i + 2);
         return temp;
     }
     return nullptr;
@@ -37,17 +36,15 @@ int main()
     int n;
     cin >> n;
 
-    vector<int> arr(n);
+    int arr[n];
     for (int i = 0; i < n; ++i)
     {
         cin >> arr[i];
     }
 
-    // Tạo cây nhị phân từ mảng
-    Node *root = buildBinaryTree(arr, n, 0);
+    Node *root = TaoCay(arr, n, 0);
 
-    // Duyệt cây theo thứ tự trước (NLR) và in ra màn hình
-    preOrderTraversal(root);
+    Duyet(root);
 
     return 0;
 }

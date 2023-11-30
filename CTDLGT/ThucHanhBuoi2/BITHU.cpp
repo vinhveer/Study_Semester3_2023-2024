@@ -9,14 +9,16 @@ struct Node
     char data;
     Node *left;
     Node *right;
-    Node(char val) : data(val), left(nullptr), right(nullptr) {}
+    Node(char val) : data(val), left(nullptr), right(nullptr) {} // Hàm tạo Node
 };
 
+// Kiem tra xem co phai la toan tu khong
 bool isOperator(char c)
 {
     return c == '+' || c == '-' || c == '*' || c == '/' || c == '^';
 }
 
+// Tinh chieu cao
 int getHeight(Node *root)
 {
     if (root == nullptr)
@@ -32,18 +34,20 @@ int getHeight(Node *root)
 
 int main()
 {
+    // Nhap bieu thuc
     string expression;
     getline(cin, expression);
 
     stack<Node *> s;
 
+    // Duyet tung ki tu
     for (char c : expression)
     {
-        if (isalpha(c))
+        if (isalpha(c)) // Neu la so hang, tao nut moi va dua vao stack
         {
             s.push(new Node(c));
         }
-        else if (isOperator(c))
+        else if (isOperator(c)) // Neu la toan tu, gan nut
         {
             Node *newNode = new Node(c);
             newNode->right = s.top();
@@ -54,7 +58,7 @@ int main()
         }
     }
 
-    Node *root = s.top();
+    Node *root = s.top(); // nut goc
 
     int height = getHeight(root);
 
