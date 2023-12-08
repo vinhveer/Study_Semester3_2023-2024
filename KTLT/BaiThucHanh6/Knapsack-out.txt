@@ -1,0 +1,7 @@
+0 0 0 0 4 4 4 4 4 
+0 0 7 7 7 7 7 11 11 
+0 0 7 7 7 10 10 11 17 
+0 0 7 7 7 10 10 11 17 
+17
+Vat thu:3,gia tri:10,trong luong:6
+Vat thu:2,gia tri:7,trong luong:3
