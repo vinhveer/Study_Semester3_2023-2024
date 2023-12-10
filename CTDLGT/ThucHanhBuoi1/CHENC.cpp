@@ -6,7 +6,7 @@ struct Node
     int info;
     Node *next;
 };
-Node *head = nullptr;
+Node *head;
 
 Node *TaoNut(int x)
 {
