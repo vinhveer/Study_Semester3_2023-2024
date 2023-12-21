@@ -1,42 +1,42 @@
-#include <iostream>
-using namespace std;
+#include <stdio.h>
+#define MAX 50
 
-const int MAX_N = 50;
-
-int x[MAX_N];
+int x[MAX]; // lưu nghiệm
 int k, n;
 
-void KhoiTao()
+// khởi tạo
+void khoiTao()
 {
-    x[0] = 0;
+    for (int i = 0; i <= n; i++)
+        x[i] = 0;
 }
 
-void InNghiem(int n)
+// xuất nghiệm
+void xuatNghiem()
 {
-    for (int i = 1; i <= n; i++)
-        cout << x[i] << " ";
-    cout << endl;
+    for (int i = 1; i <= k; i++)
+        printf("%d ", x[i]);
+    printf("\n");
 }
 
-void TaoNghiem(int i)
+void Try(int i)
 {
     for (int j = x[i - 1] + 1; j <= n - k + i; j++)
     {
         x[i] = j;
         if (i == k)
-            InNghiem(k);
+            xuatNghiem();
         else
-            TaoNghiem(i + 1);
+            Try(i + 1);
     }
 }
 
 int main()
 {
-    cin >> k;
-    cin >> n;
-
-    KhoiTao();
-    TaoNghiem(1);
-
+    x[0] = 0;
+    printf("Nhap k, n: ");
+    scanf("%d%d", &k, &n);
+    khoiTao();
+    Try(1);
     return 0;
 }
