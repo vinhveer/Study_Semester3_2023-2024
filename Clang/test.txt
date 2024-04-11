@@ -1,0 +1,36 @@
+Nếu I/O chỉ đọc 1 kí tự tại một thời điểm
+Một ô nhớ 16 bit (word) chứa 2 kí tự:
+'6E' đổi sang nhị phân mã ASCII (8 bit) là: 0011011001000101
+Để gửi 2 kí tự tới I/O ta sẽ làm:
+1. Đưa word vào 1 thanh ghi
+2. Dịch phải giá trị thanh ghi này 8 lần ta được: 0000000000110110
+3. Ta đọc thanh ghi ra I/O như vậy ta đã gửi được kí tự 6
+tiếp theo ta gửi kí tự còn lại (kí tự bên phải) sang I/O như sau:
+1. Nạp lại ô nhớ chứa hai kí tự 64 vào thanh ghi
+2. AND thanh ghi với 0000000011111111 ta được 0000000001000101
+Điều này sẽ giúp loại bỏ kí tự đã chuyển vừa nãy sang I/O
+3. Chuyển giá trị thanh ghi ra I/O là ta hoàn thành chuyển kí tự cuối cùng sang I/O.
+
+F=(B+D)(C'+D)
+ =D+BC'
+ =(D+BC')''
+ =(D'(BC')')'
+
+Dạng nhị phân của 4 là: 0100 
+Dạng nhị phân của -7:
+Dạng nhị phân của 7 là: 0111
+- Bù 1 là : 1000
+-Cộng thêm 1 sẽ có kết quả bù 2 là : 1001
+Do vậy ta có phép toán tương đương như sau: 0100+1001=1101
+Đổi sang thập phân là: -3
+
+A           Q           Q-1         M
+0000        0011        0           1011
+0101        0011        0           1011    A=A-M
+0010        1001        1           1011    Dịch phải
+0001        0100        1           1011    Dịch phải
+1100        0100        1           1011    A=A+M
+1110        0010        0           1011    Dịch phải
+1111        0001        0           1011    Dịch phải
+
+Kết quả: 11110001
