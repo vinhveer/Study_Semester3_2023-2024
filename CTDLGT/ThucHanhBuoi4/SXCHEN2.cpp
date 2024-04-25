@@ -1,23 +1,31 @@
 #include <iostream>
 using namespace std;
 
-void PrintArray(int a[], int size, int Index) {
-    for (int i = 0; i < size; ++i) {
-        if (i == Index) {
+void PrintArray(int a[], int size, int Index)
+{
+    for (int i = 0; i < size; ++i)
+    {
+        if (i == Index)
+        {
             cout << "[" << a[i] << "] ";
-        } else {
+        }
+        else
+        {
             cout << a[i] << " ";
         }
     }
     cout << endl;
 }
 
-void InsertionSort(int a[], int n) {
-    for (int i = 1; i < n; ++i) {
+void InsertionSort(int a[], int n)
+{
+    for (int i = 1; i < n; ++i)
+    {
         int key = a[i];
         int j = i - 1;
 
-        while (j >= 0 && key < a[j]) {
+        while (j >= 0 && key < a[j])
+        {
             a[j + 1] = a[j];
             --j;
         }
@@ -27,13 +35,15 @@ void InsertionSort(int a[], int n) {
     }
 }
 
-int main() {
+int main()
+{
     int n;
     cin >> n;
 
     int a[20];
 
-    for (int i = 0; i < n; ++i) {
+    for (int i = 0; i < n; ++i)
+    {
         cin >> a[i];
     }
 
